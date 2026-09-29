@@ -1,35 +1,170 @@
-<!-- TEXT A FRIEND -->
-<a
-  href="sms:?body=Hey%21%20I%20thought%20you%20might%20be%20interested%20in%20checking%20out%20BYU-Idaho.%20I%20really%20love%20it%20here%2C%20and%20I%20think%20you%27d%20enjoy%20seeing%20the%20campus.%20You%20can%20sign%20up%20for%20a%20fun%20campus%20tour%20at%20https%3A%2F%2Fbyui.edu%2Fcampus-tours"
->
-  Text a Friend
-</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- SHARE WITH A FRIEND -->
-<button id="shareButton" type="button">
-  Share with a Friend
-</button>
+  <title>Invite a Friend to BYU-Idaho</title>
 
-<script>
-document.getElementById("shareButton").addEventListener("click", async () => {
-
-  const shareData = {
-    text: "Hey! I thought you might be interested in checking out BYU-Idaho. I really love it here, and I think you'd enjoy seeing the campus. You can sign up for a fun campus tour at",
-    url: "https://byui.edu/campus-tours"
-  };
-
-  try {
-    if (navigator.share) {
-      await navigator.share(shareData);
-    } else {
-      await navigator.clipboard.writeText(
-        shareData.text + " " + shareData.url
-      );
-
-      alert("Invitation copied to your clipboard.");
+  <style>
+    * {
+      box-sizing: border-box;
     }
-  } catch (error) {
-    console.log("Share canceled or failed:", error);
-  }
-});
-</script>
+
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f5f5f5;
+      color: #222;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-size: 30px;
+      line-height: 1.2;
+      color: #006eb6;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.5;
+      margin-bottom: 30px;
+    }
+
+    .button {
+      display: block;
+      width: 100%;
+      margin: 15px auto;
+      padding: 17px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+
+    .button:hover {
+      opacity: 0.9;
+    }
+
+    .text-button {
+      background-color: #006eb6;
+      color: #ffffff;
+    }
+
+    .share-button {
+      background-color: #e5e5e5;
+      color: #222222;
+    }
+
+    .note {
+      margin-top: 25px;
+      margin-bottom: 0;
+      font-size: 14px;
+      color: #666666;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>Know Someone Who Should Attend BYU-Idaho?</h1>
+
+    <p>
+      Invite a friend to come take a campus tour and see what BYU-Idaho is all about.
+    </p>
+
+    <!-- TEXT A FRIEND -->
+    <a
+      class="button text-button"
+      href="sms:?body=Hey%21%20I%20thought%20you%20might%20be%20interested%20in%20checking%20out%20BYU-Idaho.%20I%20really%20love%20it%20here%2C%20and%20I%20think%20you%27d%20enjoy%20seeing%20the%20campus.%20You%20can%20sign%20up%20for%20a%20fun%20campus%20tour%20at%20https%3A%2F%2Fbyui.edu%2Fcampus-tours"
+    >
+      Text a Friend
+    </a>
+
+    <!-- SHARE WITH A FRIEND -->
+    <button
+      id="shareButton"
+      class="button share-button"
+      type="button"
+    >
+      Share with a Friend
+    </button>
+
+    <p class="note">
+      Choose how you'd like to invite your friend.
+    </p>
+
+  </div>
+
+
+  <script>
+    const message =
+      "Hey! I thought you might be interested in checking out BYU-Idaho. " +
+      "I really love it here, and I think you'd enjoy seeing the campus. " +
+      "You can sign up for a fun campus tour at";
+
+    const tourURL = "https://byui.edu/campus-tours";
+
+
+    document
+      .getElementById("shareButton")
+      .addEventListener("click", async function () {
+
+        const shareData = {
+          text: message,
+          url: tourURL
+        };
+
+        try {
+
+          // Use the native Web Share feature when available
+          if (navigator.share) {
+
+            await navigator.share(shareData);
+
+          } else {
+
+            // Fallback for browsers without Web Share
+            await navigator.clipboard.writeText(
+              message + " " + tourURL
+            );
+
+            alert(
+              "The invitation has been copied to your clipboard."
+            );
+
+          }
+
+        } catch (error) {
+
+          // Usually means the user closed/canceled the share window
+          console.log(
+            "Share canceled or failed:",
+            error
+          );
+
+        }
+
+      });
+  </script>
+
+</body>
+</html>
