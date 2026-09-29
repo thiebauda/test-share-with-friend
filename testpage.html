@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invite a Friend to BYU-Idaho</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .button {
+      display: block;
+      width: 100%;
+      max-width: 400px;
+      margin: 15px auto;
+      padding: 16px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 18px;
+      cursor: pointer;
+      border: none;
+    }
+
+    .text-button {
+      background: #0076a8;
+      color: white;
+    }
+
+    .share-button {
+      background: #eee;
+      color: #222;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Know Someone Who Should Attend BYU-Idaho?</h1>
+
+  <p>
+    Invite a friend to come take a campus tour.
+  </p>
+
+  <!-- TEXT A FRIEND -->
+  <a
+    class="button text-button"
+    href="sms:?&body=Hey!%20I%20thought%20you%20might%20be%20interested%20in%20coming%20to%20take%20a%20campus%20tour%20at%20BYU-Idaho%20to%20learn%20more%20about%20why%20I%20love%20it%20here.%20Here%27s%20a%20link%20to%20sign%20up%20for%20an%20easy%20tour:%20https%3A%2F%2Fwww.byui.edu%2Fcampus-tours"
+  >
+    Text a Friend
+  </a>
+
+  <!-- SHARE WITH A FRIEND -->
+  <button
+    id="shareButton"
+    class="button share-button"
+    type="button"
+  >
+    Share with a Friend
+  </button>
+
+  <script>
+    document.getElementById("shareButton").addEventListener("click", async () => {
+
+      const shareData = {
+        title: "Visit BYU-Idaho",
+        text: "Hey! I thought you might be interested in coming to take a campus tour at BYU-Idaho to learn more about why I love it here.",
+        url: "https://www.byui.edu/campus-tours"
+      };
+
+      try {
+        if (navigator.share) {
+          await navigator.share(shareData);
+        } else {
+          alert(
+            "Sharing is not supported on this device. " +
+            "Please copy this link: https://www.byui.edu/campus-tours"
+          );
+        }
+      } catch (error) {
+        console.log("Share canceled:", error);
+      }
+
+    });
+  </script>
+
+</body>
+</html>
